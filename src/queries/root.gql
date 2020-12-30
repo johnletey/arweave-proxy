@@ -1,0 +1,20 @@
+query($owners: [String!], $hostname: [String!]!) {
+  transactions(
+    owners: $owners
+    tags: [
+      { name: "Content-Type", values: "x-arweave/name-update" }
+      { name: "Arweave-Domain", values: $hostname }
+    ]
+    first: 1
+  ) {
+    edges {
+      node {
+        id
+        tags {
+          name
+          value
+        }
+      }
+    }
+  }
+}
